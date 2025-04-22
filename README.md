@@ -1,12 +1,43 @@
-# React + Vite
+# Aboki.eth 💸
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aboki.eth is a decentralized Web3 protocol that allows users to **stake digital assets**, **access fiat loans**, and **repay to reclaim assets with rewards**—without the need for intermediaries.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔗 Live Demo
 
-## Expanding the ESLint configuration
+[View Website](https://your-domain.com)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ✨ Features
+
+- 🔒 Stake crypto assets securely
+- 💰 Get instant fiat loans based on staked assets
+- 🪙 Reclaim assets + earn rewards after repayment
+- 📱 Responsive, modern UI with animations
+- 🧠 Built with Web3, React, TailwindCSS & Framer Motion
+
+---
+
+## 🧱 Tech Stack
+
+- **React** – Frontend library
+- **Tailwind CSS** – Styling
+- **Framer Motion** – Smooth animations
+- **Solana / EVM Wallets** – Web3 integration (via Reown)
+- **React Icons** – Iconography
+
+---
+
+## 📂 Folder Structure
+
+```bash
+src/
+├── components/         # Reusable UI components
+├── context/            # Wallet connect context
+├── pages/              # Page views like Home, Whitepaper, etc.
+├── assets/             # Icons, images, etc.
+├── styles/             # Global styles
+└── App.jsx             # Main entry
+```

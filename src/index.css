@@ -34,3 +34,7 @@ body {
   animation: superBulge 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
   transform-origin: center bottom;
 }
+@keyframes chain-bounce {
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
+}

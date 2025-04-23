@@ -1,4 +1,8 @@
 import { useWalletConnect } from "../contexts/WalletConnectContext";
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 const wallets = [
   { name: "Metamask", icon: "/icons/metamask.png" },
   { name: "Coinbase", icon: "/icons/coinbase.png" },
@@ -13,7 +17,30 @@ const wallets = [
 ];
 
 const ConnectWalletModal = () => {
+  const navigate = useNavigate();
+  const auth = useAuth();
+  const { connect } = auth || {};
   const { closeModal } = useWalletConnect();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleConnect = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      await new Promise((res) => setTimeout(res, 2000));
+      connect;
+      closeModal();
+      navigate("/dashboard");
+    } catch (err) {
+      setError("Failed to connect wallet. Please try again");
+      console.error("Connection error:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-2xl px-4"
@@ -45,8 +72,14 @@ const ConnectWalletModal = () => {
           ))}
         </div>
 
-        <button className="w-full bg-white text-[#4169e1] py-3 rounded-full cursor-pointer font-medium hover:bg-[#4169E1] hover:text-white transition">
-          Connect wallet
+        <button
+          className={`w-full  py-3 rounded-full font-medium transition ${isLoading? 'bg-gray-500 text-white cursor-not-allowed': 'bg-white text-[#4169e1] cursor-pointer' } `}
+          onClick={handleConnect}
+          disabled={isLoading}
+        >
+          {isLoading ? 
+            <BarsLoader />
+             : "Connect Wallet"}
         </button>
       </div>
     </div>
@@ -54,3 +87,29 @@ const ConnectWalletModal = () => {
 };
 
 export default ConnectWalletModal;
+
+const BarsLoader = ()=>{
+  return(
+    <div className="flex items-center justify-center gap-1">
+      <div className="flex space-x-[2px]">
+        {['▄','▀','▄','▀','▄'].map((char, i) => (
+          <span 
+            key={i}
+            className="text-blue-400 text-xs"
+            style={{
+              animation: `chain-bounce 1.2s infinite`,
+              animationDelay: `${i * 0.1}s`
+            }}
+          >
+            {char}
+          </span>
+        ))}
+      </div>
+      <span className="ml-2">Connecting wallet</span>
+  </div>
+  )
+}
+
+
+
+

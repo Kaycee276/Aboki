@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
+import { useState } from "react";
 
 export const LoanCard = ({ date }) => {
+	const [deposit, setDeposit] = useState("");
+	const [borrow, setBorrow] = useState("");
 	return (
 		<motion.div
 			className="bg-gray-800 rounded-lg p-4 md:p-6 flex-1"
@@ -18,14 +21,16 @@ export const LoanCard = ({ date }) => {
 				<LoanInput
 					label="Deposit"
 					currency="USDT"
-					value="0"
+					value={deposit}
+					onChange={(e) => setDeposit(e.target.value)}
 					equivalent="$0.00"
 					delay={1.1}
 				/>
 				<LoanInput
 					label="Borrow"
 					currency="XGN"
-					value="0"
+					value={borrow}
+					onChange={(e) => setBorrow(e.target.value)}
 					equivalent="$0.00"
 					delay={1.2}
 				/>
@@ -36,7 +41,7 @@ export const LoanCard = ({ date }) => {
 	);
 };
 
-const LoanInput = ({ label, currency, value, equivalent, delay }) => (
+const LoanInput = ({ label, currency, value, onChange, equivalent, delay }) => (
 	<motion.div
 		className="border border-blue-900 rounded-md p-4 mb-4"
 		initial={{ x: -20, opacity: 0 }}
@@ -44,15 +49,24 @@ const LoanInput = ({ label, currency, value, equivalent, delay }) => (
 		transition={{ delay }}
 	>
 		<div className="flex justify-between items-center mb-2">
-			<span>{label}</span>
+			<span className="text-white">{label}</span>
 			<div className="flex items-center space-x-1 text-sm">
 				<div className="w-2 h-2 rounded-full bg-green-400"></div>
 				<span>{currency}</span>
 				<span className="text-gray-500">▾</span>
 			</div>
 		</div>
-		<div className="text-3xl mb-1">{value}</div>
-		<div className="text-gray-500">{equivalent}</div>
+
+		<input
+			type="text"
+			inputMode="numeric"
+			value={value}
+			onChange={onChange}
+			placeholder="0"
+			className="w-full text-3xl bg-transparent text-white placeholder-gray-500 focus:outline-none focus:ring-0"
+		/>
+
+		<div className="text-gray-500 mt-1">{equivalent}</div>
 	</motion.div>
 );
 

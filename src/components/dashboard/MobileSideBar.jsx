@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Database, BarChart2, History, Gift, LogOut, X } from "lucide-react";
+import { LayoutDashboard, Trophy, History, LogOut, X } from "lucide-react";
+import { MdOutlinePayments } from "react-icons/md";
 
 export const MobileSidebar = ({ isOpen, onClose }) => {
 	return (
@@ -16,7 +17,7 @@ export const MobileSidebar = ({ isOpen, onClose }) => {
 				</h1>
 				<motion.button
 					onClick={onClose}
-					className="p-2 rounded-md"
+					className="p-2 rounded-md cursor-pointer"
 					whileTap={{ scale: 0.9 }}
 					whileHover={{ backgroundColor: "rgba(255,255,255,0.1)" }}
 				>
@@ -25,10 +26,14 @@ export const MobileSidebar = ({ isOpen, onClose }) => {
 			</div>
 
 			<nav className="flex flex-col space-y-4 flex-grow">
-				<NavButton icon={<Database size={18} />} text="Dashboard" active />
-				<NavButton icon={<BarChart2 size={18} />} text="Loan status" />
+				<NavButton
+					icon={<LayoutDashboard size={18} />}
+					text="Dashboard"
+					active
+				/>
+				<NavButton icon={<MdOutlinePayments size={18} />} text="Loan status" />
 				<NavButton icon={<History size={18} />} text="Transaction history" />
-				<NavButton icon={<Gift size={18} />} text="Rewards" />
+				<NavButton icon={<Trophy size={18} />} text="Rewards" />
 			</nav>
 
 			<LogoutButton />
@@ -49,7 +54,7 @@ const NavButton = ({ icon, text, active = false }) => (
 
 const LogoutButton = () => (
 	<motion.button
-		className="flex items-center space-x-2 text-red-400 mt-auto p-2"
+		className="flex items-center space-x-2 text-red-400 mt-auto p-2 cursor-pointer"
 		whileHover={{ scale: 1.03, color: "#f87171" }}
 		whileTap={{ scale: 0.97 }}
 	>

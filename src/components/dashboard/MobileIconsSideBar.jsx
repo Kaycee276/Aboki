@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Database, BarChart2, History, Gift, LogOut } from "lucide-react";
+import { LayoutDashboard, Trophy, History, LogOut } from "lucide-react";
+import { MdOutlinePayments } from "react-icons/md";
 
 export const MobileIconsSidebar = () => {
 	return (
@@ -11,14 +12,14 @@ export const MobileIconsSidebar = () => {
 			</div>
 
 			<nav className="flex flex-col space-y-4 flex-grow items-center">
-				<IconButton icon={<Database size={18} />} active />
-				<IconButton icon={<BarChart2 size={18} />} />
+				<IconButton icon={<LayoutDashboard size={18} />} active />
+				<IconButton icon={<MdOutlinePayments size={18} />} />
 				<IconButton icon={<History size={18} />} />
-				<IconButton icon={<Gift size={18} />} />
+				<IconButton icon={<Trophy size={18} />} />
 			</nav>
 
 			<motion.button
-				className="flex items-center justify-center text-red-400 mt-auto p-2 w-10 h-10"
+				className="flex items-center justify-center text-red-400 mt-auto p-2 w-10 cursor-pointer h-10"
 				whileHover={{ scale: 1.1, color: "#f87171" }}
 				whileTap={{ scale: 0.9 }}
 			>

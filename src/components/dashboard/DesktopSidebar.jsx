@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Database, BarChart2, History, Gift, LogOut } from "lucide-react";
+import { LayoutDashboard, Trophy, History, LogOut } from "lucide-react";
+import { MdOutlinePayments } from "react-icons/md";
 
 export const DesktopSidebar = () => {
 	return (
@@ -22,13 +23,13 @@ export const DesktopSidebar = () => {
 
 			<nav className="flex flex-col space-y-4 flex-grow">
 				<AnimatedNavButton
-					icon={<Database size={18} />}
+					icon={<LayoutDashboard size={18} />}
 					text="Dashboard"
 					active
 					delay={0.5}
 				/>
 				<AnimatedNavButton
-					icon={<BarChart2 size={18} />}
+					icon={<MdOutlinePayments size={18} />}
 					text="Loan status"
 					delay={0.6}
 				/>
@@ -38,14 +39,14 @@ export const DesktopSidebar = () => {
 					delay={0.7}
 				/>
 				<AnimatedNavButton
-					icon={<Gift size={18} />}
+					icon={<Trophy size={18} />}
 					text="Rewards"
 					delay={0.8}
 				/>
 			</nav>
 
 			<motion.button
-				className="flex items-center space-x-2 text-red-400 mt-auto p-2"
+				className="flex items-center space-x-2 text-red-400 mt-auto p-2 cursor-pointer"
 				whileHover={{ scale: 1.03, color: "#f87171" }}
 				whileTap={{ scale: 0.97 }}
 				initial={{ opacity: 0 }}

@@ -14,12 +14,12 @@ export default function Dashboard() {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
 	return (
-		<div className="flex h-screen bg-gray-900 text-white overflow-hidden">
+		<div className="flex h-screen bg-radial from-[#636DC5] to-black text-white overflow-hidden">
 			{/* Mobile Sidebar Toggle */}
 			<div className="md:hidden absolute top-4 left-4 z-20">
 				<motion.button
 					onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-					className={`p-2 rounded-md ${
+					className={`p-2 rounded-md cursor-pointer ${
 						isSidebarOpen ? "bg-transparent" : "bg-gray-800"
 					}`}
 					whileTap={{ scale: 0.9 }}

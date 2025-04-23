@@ -1,45 +1,29 @@
+import { Wallet, HandCoins, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
-import { Database, DollarSign, TrendingUp } from "lucide-react";
 
-export const StatsCards = () => {
-	return (
-		<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-			<StatCard
-				icon={<Database size={16} />}
-				label="Total assets"
-				value="$ 87,743"
-				delay={0.7}
-			/>
-			<StatCard
-				icon={<DollarSign size={16} />}
-				label="Loan balance"
-				value="$ 18,342"
-				delay={0.8}
-			/>
-			<StatCard
-				icon={<TrendingUp size={16} />}
-				label="Rewards"
-				value="+12.3%"
-				colored
-				delay={0.9}
-			/>
-		</div>
-	);
-};
-
-const StatCard = ({ icon, label, value, colored = false, delay = 0 }) => (
+const StatCard = ({ icon: Icon, label, value }) => (
 	<motion.div
-		className="bg-gray-800 p-4 rounded-lg sm:col-span-2 md:col-span-1"
-		initial={{ scale: 0.9, opacity: 0 }}
-		animate={{ scale: 1, opacity: 1 }}
-		transition={{ delay }}
+		className="flex items-center gap-4 px-5 py-4 w-full md:w-auto"
+		initial={{ x: 20, opacity: 0 }}
+		animate={{ x: 0, opacity: 1 }}
+		transition={{ delay: 1, type: "spring", stiffness: 100 }}
 	>
-		<div className="flex items-center text-sm text-gray-400 mb-2">
-			{icon}
-			<span className="ml-2">{label}</span>
+		<div className="bg-[#404875] p-3 rounded-lg">
+			<Icon className="text-blue-500 w-6 h-6" />
 		</div>
-		<div className={`text-2xl font-bold ${colored ? "text-green-400" : ""}`}>
-			{value}
+		<div>
+			<p className="text-sm text-white/70">{label}</p>
+			<p className="text-lg text-white font-semibold">{value}</p>
 		</div>
 	</motion.div>
 );
+
+export function StatsCards() {
+	return (
+		<div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center p-6 rounded-xl w-full">
+			<StatCard icon={Wallet} label="Total assets" value="$87,743" />
+			<StatCard icon={HandCoins} label="Loan balance" value="$18,342" />
+			<StatCard icon={Trophy} label="Rewards" value="+12.3%" />
+		</div>
+	);
+}

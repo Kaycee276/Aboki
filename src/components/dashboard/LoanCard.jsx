@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Calendar } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import { FaEthereum, FaBitcoin } from "react-icons/fa";
+import { SiTether } from "react-icons/si";
 
 export const LoanCard = ({ date }) => {
 	const [deposit, setDeposit] = useState("");
@@ -72,40 +74,78 @@ export const LoanCard = ({ date }) => {
 
 const LoanInput = ({ label, value, onChange, delay, setRate }) => {
 	const [selectedCurrency, setSelectedCurrency] = useState("usdt");
-	const [currencies, setCurrencies] = useState([]);
-	const [rate, setLocalRate] = useState(null);
+	const currencies = [
+		{ id: "ethereum", symbol: "eth" },
+		{ id: "bitcoin", symbol: "btc" },
+		{ id: "tether", symbol: "usdt" },
+	];
+	const currencyIcons = {
+		eth: <FaEthereum className="text-[#627EEA] mr-2" size={16} />,
+		btc: <FaBitcoin className="text-[#F7931A] mr-2" size={16} />,
+		usdt: <SiTether className="text-[#26A17B] mr-2" size={16} />,
+	};
+	const [rates, setRates] = useState({
+		eth: null,
+		btc: null,
+		usdt: null,
+	});
+	const [loading, setLoading] = useState(false);
 
-	// Fetch available currencies
+	// Fetch rates for all currencies
 	useEffect(() => {
-		fetch("https://api.coingecko.com/api/v3/simple/supported_vs_currencies")
-			.then((res) => res.json())
-			.then((data) => setCurrencies(data.slice(0, 30))); // limit for usability
-	}, []);
-
-	// Fetch rate for selected currency in USD
-	useEffect(() => {
-		const fetchRate = async () => {
+		const fetchRates = async () => {
+			setLoading(true);
 			try {
-				const res = await fetch(
-					`https://api.coingecko.com/api/v3/simple/price?ids=usd-coin&vs_currencies=usd`
+				const response = await fetch(
+					`https://api.coingecko.com/api/v3/simple/price?ids=ethereum,bitcoin,tether&vs_currencies=usd`
 				);
-				const data = await res.json();
-				const key = Object.keys(data)[0];
-				const rate = data[key]?.usd || 0;
+				const data = await response.json();
 
-				setLocalRate(rate); // Local use
-				setRate(rate); // Pass to parent
-			} catch (err) {
-				console.error("Failed to fetch rate", err);
+				setRates({
+					eth: data.ethereum?.usd || 1,
+					btc: data.bitcoin?.usd || 1,
+					usdt: data.tether?.usd || 1,
+				});
+
+				// Set initial rate based on selected currency
+				const currentRate =
+					data[
+						selectedCurrency === "eth"
+							? "ethereum"
+							: selectedCurrency === "btc"
+							? "bitcoin"
+							: "tether"
+					]?.usd || 1;
+				setRate(currentRate);
+			} catch (error) {
+				console.error("Failed to fetch rates:", error);
+				// Fallback rates if API fails
+				setRates({
+					eth: 1,
+					btc: 1,
+					usdt: 1,
+				});
+				setRate(1);
+			} finally {
+				setLoading(false);
 			}
 		};
 
-		fetchRate();
-	}, []);
+		fetchRates();
+	}, [setRate]);
+
+	// Update parent rate when currency changes
+	useEffect(() => {
+		if (rates[selectedCurrency] !== null) {
+			setRate(rates[selectedCurrency]);
+		}
+	}, [selectedCurrency, rates, setRate]);
 
 	const computedEquivalent = () => {
+		if (loading) return "Loading rates...";
 		const numericValue = parseFloat(value) || 0;
-		return rate ? `$${(numericValue * rate).toFixed(2)}` : "Loading...";
+		const currentRate = rates[selectedCurrency] || 1;
+		return `$${(numericValue * currentRate).toFixed(2)}`;
 	};
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -138,12 +178,14 @@ const LoanInput = ({ label, value, onChange, delay, setRate }) => {
 				</label>
 
 				<div className="relative w-24" ref={dropdownRef}>
-					{/* Selected value display */}
 					<div
 						className="flex justify-between items-center bg-[#181818] text-white border border-gray-600 rounded-lg px-2 py-1 text-sm cursor-pointer hover:scale-105 duration-300 transition"
 						onClick={() => setIsOpen(!isOpen)}
 					>
-						<span>{selectedCurrency.toUpperCase()}</span>
+						<div className="flex items-center">
+							{currencyIcons[selectedCurrency]}
+							<span>{selectedCurrency.toUpperCase()}</span>
+						</div>
 						<svg
 							className={`w-4 h-4 transform transition-transform ${
 								isOpen ? "rotate-180" : ""
@@ -161,23 +203,23 @@ const LoanInput = ({ label, value, onChange, delay, setRate }) => {
 						</svg>
 					</div>
 
-					{/* Dropdown options */}
 					{isOpen && (
-						<div className="absolute z-10 mt-1 w-full max-h-36 custom-scrollbar overflow-y-scroll  bg-gray-800 border border-gray-600 rounded-lg shadow-lg overflow-hidden">
-							{currencies.map((cur) => (
+						<div className="absolute z-10 mt-1 w-full max-h-36 custom-scrollbar overflow-y-auto bg-gray-800 border border-gray-600 rounded-lg shadow-lg">
+							{currencies.map((currency) => (
 								<div
-									key={cur}
-									className={`px-3 py-2 text-sm cursor-pointer hover:bg-blue-600 transition-colors ${
-										selectedCurrency === cur
+									key={currency.symbol}
+									className={`px-3 py-2 text-sm cursor-pointer hover:bg-blue-600 transition-colors  ${
+										selectedCurrency === currency.symbol
 											? "bg-blue-700 text-white"
 											: "text-gray-200"
 									}`}
 									onClick={() => {
-										setSelectedCurrency(cur);
+										setSelectedCurrency(currency.symbol);
 										setIsOpen(false);
 									}}
 								>
-									{cur.toUpperCase()}
+									{/* {currencyIcons[currency.symbol]} */}
+									{currency.symbol.toUpperCase()}
 								</div>
 							))}
 						</div>
@@ -194,7 +236,15 @@ const LoanInput = ({ label, value, onChange, delay, setRate }) => {
 				className="w-full text-3xl bg-transparent text-white placeholder-gray-500 focus:outline-none"
 			/>
 
-			<div className="text-gray-500 mt-1">{computedEquivalent()}</div>
+			<div className="text-gray-500 mt-1">
+				{computedEquivalent()}
+				{!loading && (
+					<span className="text-xs ml-2">
+						(1 {selectedCurrency.toUpperCase()} = $
+						{rates[selectedCurrency]?.toFixed(2) || "1.00"})
+					</span>
+				)}
+			</div>
 		</motion.div>
 	);
 };

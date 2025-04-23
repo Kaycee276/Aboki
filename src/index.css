@@ -2,39 +2,71 @@
 @import "tailwindcss";
 
 body {
-  font-family: "Space Grotesk", "Inter", "system-ui";
+	font-family: "Space Grotesk", "Inter", "system-ui";
 }
 
 .tooltip {
-  @apply absolute bottom-full mb-1 left-1/2 transform -translate-x-1/2 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300;
+	@apply absolute bottom-full mb-1 left-1/2 transform -translate-x-1/2 text-xs bg-gray-800 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300;
 }
 
 @keyframes superBulge {
-  0% {
-    opacity: 0;
-    transform: scale(0.99) translateY(30px);
-  }
-  30% {
-    opacity: 0.8;
-    transform: scale(1.01);
-  }
-  50% {
-    transform: scale(0.99);
-  }
-  70% {
-    transform: scale(1.01);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+	0% {
+		opacity: 0;
+		transform: scale(0.99) translateY(30px);
+	}
+	30% {
+		opacity: 0.8;
+		transform: scale(1.01);
+	}
+	50% {
+		transform: scale(0.99);
+	}
+	70% {
+		transform: scale(1.01);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
 }
 
 .animate-fade-in-up {
-  animation: superBulge 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-  transform-origin: center bottom;
+	animation: superBulge 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+	transform-origin: center bottom;
 }
+
 @keyframes chain-bounce {
-  0%, 100% { opacity: 0.3; transform: translateY(0); }
-  50% { opacity: 1; transform: translateY(-2px); }
+	0%,
+	100% {
+		opacity: 0.3;
+		transform: translateY(0);
+	}
+	50% {
+		opacity: 1;
+		transform: translateY(-2px);
+	}
 }
+
+/* For WebKit browsers */
+.custom-scrollbar::-webkit-scrollbar {
+	width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+	background: #2d3748; /* bg-gray-800 */
+	border-radius: 0 4px 4px 0;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+	background: #4a5568; /* bg-gray-700 */
+	border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+	background: #718096; /* bg-gray-600 */
+}
+
+/* .custom-scrollbar {
+	scrollbar-width: thin;
+	scrollbar-color: #4a5568 #2d3748;
+} */

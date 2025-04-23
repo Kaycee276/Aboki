@@ -14,7 +14,7 @@ export default function Dashboard() {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
 	return (
-		<div className="flex h-screen bg-radial from-[#636DC5] to-black text-white overflow-hidden">
+		<div className="flex h-screen bg-radial from-[#636DC5] to-black text-white overflow-hidden ">
 			{/* Mobile Sidebar Toggle */}
 			<div className="md:hidden absolute top-4 left-4 z-20">
 				<motion.button
@@ -46,7 +46,7 @@ export default function Dashboard() {
 
 			{/* Main Content */}
 			<motion.div
-				className="flex-1 flex flex-col p-4 md:p-6 overflow-y-auto ml-16 md:ml-0 w-full"
+				className="flex-1 flex flex-col p-4 md:p-6 overflow-y-auto ml-16 md:ml-0 w-full custom-scrollbar"
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ delay: 0.3 }}

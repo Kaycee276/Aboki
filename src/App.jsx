@@ -10,32 +10,32 @@ import Dashboard from "./pages/Dashboard";
 import GlowingBubblesBackground from "./common/GlowingBubbles";
 
 const App = () => {
-  const location = useLocation();
+	const location = useLocation();
 
-  const isDashboard = location.pathname.startsWith("/dashboard");
+	const isDashboard = location.pathname.startsWith("/dashboard");
 
-  return (
-    <>
-      {isDashboard ? (
-        <Routes location={location} key={location.pathname}>
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      ) : (
-        <main className="bg-gradient-to-br from-[#161616] to-[#000512] pt-4 px-6">
-          <Header />
-          <GlowingBubblesBackground>
-            <AnimatePresence mode="wait">
-              <Routes location={location} key={location.pathname}>
-                <Route path="/" element={<Home />} />
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/whitepaper" element={<Whitepaper />} />
-              </Routes>
-            </AnimatePresence>
-          </GlowingBubblesBackground>
-        </main>
-      )}
-    </>
-  );
+	return (
+		<>
+			{isDashboard ? (
+				<Routes location={location} key={location.pathname}>
+					<Route path="/dashboard" element={<Dashboard />} />
+				</Routes>
+			) : (
+				<main className="bg-gradient-to-br from-[#161616] to-[#000512] pt-4 px-6 ">
+					<Header />
+					<GlowingBubblesBackground>
+						<AnimatePresence mode="wait">
+							<Routes location={location} key={location.pathname}>
+								<Route path="/" element={<Home />} />
+								<Route path="/faq" element={<FAQ />} />
+								<Route path="/whitepaper" element={<Whitepaper />} />
+							</Routes>
+						</AnimatePresence>
+					</GlowingBubblesBackground>
+				</main>
+			)}
+		</>
+	);
 };
 
 export default App;

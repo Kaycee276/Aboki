@@ -27,7 +27,7 @@ export const LoanCard = ({ date }) => {
 				<button className="text-gray-400 hover:text-white">Redeem</button>
 			</div>
 
-			<div className="max-w-lg mx-auto">
+			<form className="max-w-lg mx-auto">
 				<LoanInput
 					label="Deposit"
 					value={deposit}
@@ -44,7 +44,12 @@ export const LoanCard = ({ date }) => {
 				/>
 
 				{/* Loan Summary */}
-				<div className="text-sm text-gray-400 mt-2 mb-4 space-y-1">
+				<motion.div
+					initial={{ x: -20, opacity: 0 }}
+					animate={{ x: 0, opacity: 1 }}
+					transition={{ delay: 1, type: "spring", stiffness: 100 }}
+					className="text-sm text-gray-400 mt-2 mb-4 space-y-1"
+				>
 					<p>
 						Deposit (USD):{" "}
 						<span className="text-white">${depositUSD.toFixed(2)}</span>
@@ -63,11 +68,11 @@ export const LoanCard = ({ date }) => {
 							{ltv.toFixed(2)}%
 						</span>
 					</p>
-				</div>
+				</motion.div>
 
 				<LoanDateInput date={date} delay={1.3} />
 				<ProceedButton delay={1.4} disabled={!isValid} />
-			</div>
+			</form>
 		</motion.div>
 	);
 };
@@ -179,7 +184,7 @@ const LoanInput = ({ label, value, onChange, delay, setRate }) => {
 
 				<div className="relative w-24" ref={dropdownRef}>
 					<div
-						className="flex justify-between items-center bg-[#181818] text-white border border-gray-600 rounded-lg px-2 py-1 text-sm cursor-pointer hover:scale-105 duration-300 transition"
+						className="flex justify-between items-center bg-[#181818] text-white border border-gray-600 rounded-t-lg px-2 py-1 text-sm cursor-pointer "
 						onClick={() => setIsOpen(!isOpen)}
 					>
 						<div className="flex items-center">
@@ -204,7 +209,7 @@ const LoanInput = ({ label, value, onChange, delay, setRate }) => {
 					</div>
 
 					{isOpen && (
-						<div className="absolute z-10 mt-1 w-full max-h-36 custom-scrollbar overflow-y-auto bg-gray-800 border border-gray-600 rounded-lg shadow-lg">
+						<div className="absolute z-10 w-full max-h-36 custom-scrollbar overflow-y-auto bg-gray-800 border border-gray-600 rounded-b-lg shadow-lg">
 							{currencies.map((currency) => (
 								<div
 									key={currency.symbol}

@@ -4,7 +4,7 @@ import { Menu } from "lucide-react";
 
 import { DesktopSidebar } from "../components/dashboard/DesktopSidebar";
 import { Header } from "../components/dashboard/Header";
-import { LoanCard } from "../components/dashboard/LoanCard";
+import { LoanCard } from "../components/dashboard/LoanForm/LoanCard";
 import { MobileIconsSidebar } from "../components/dashboard/MobileIconsSideBar";
 import { MobileSidebar } from "../components/dashboard/MobileSideBar";
 import { StatsCards } from "../components/dashboard/StatsCards";

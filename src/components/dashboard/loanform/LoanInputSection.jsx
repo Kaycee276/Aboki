@@ -1,5 +1,5 @@
 // components/LoanInputSection.js
-import { TokenSelector, TokenDropdown } from "./TokenComponents";
+import { TokenSelector, TokenDropdown } from "./TokenSelector";
 
 export const LoanInputSection = ({
 	title,

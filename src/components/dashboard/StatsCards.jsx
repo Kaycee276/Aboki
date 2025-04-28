@@ -18,12 +18,16 @@ const StatCard = ({ icon: Icon, label, value }) => (
 	</motion.div>
 );
 
-export function StatsCards() {
+export function StatsCards({ assets, loanBalance, reward }) {
 	return (
 		<div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center p-6 rounded-xl w-full">
-			<StatCard icon={Wallet} label="Total assets" value="$87,743" />
-			<StatCard icon={HandCoins} label="Loan balance" value="$18,342" />
-			<StatCard icon={Trophy} label="Rewards" value="+12.3%" />
+			<StatCard icon={Wallet} label="Total assets" value={`$${assets}`} />
+			<StatCard
+				icon={HandCoins}
+				label="Loan balance"
+				value={`$${loanBalance}`}
+			/>
+			<StatCard icon={Trophy} label="Rewards" value={`${reward}%`} />
 		</div>
 	);
 }

@@ -1,27 +1,30 @@
 // src/contexts/AuthContext.jsx
 import { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [connected, setConnected] = useState(false);
+	const [connected, setConnected] = useState(false);
+	const navigate = useNavigate();
 
-  const connect = () => {
-    console.log("Connected!"); // Just to confirm it's working
-    setConnected(true);
-  };
+	const connect = () => {
+		console.log("Connected!"); // Just to confirm it's working
+		setConnected(true);
+	};
 
-  const disconnect = () => {
-    setConnected(false);
-  };
+	const disconnect = () => {
+		setConnected(false);
+		navigate("/");
+	};
 
-  return (
-    <AuthContext.Provider value={{ connected, connect, disconnect }}>
-      {children}
-    </AuthContext.Provider>
-  );
+	return (
+		<AuthContext.Provider value={{ connected, connect, disconnect }}>
+			{children}
+		</AuthContext.Provider>
+	);
 };
 
 export const useAuth = () => {
-  return useContext(AuthContext);
+	return useContext(AuthContext);
 };

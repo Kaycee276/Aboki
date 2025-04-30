@@ -6,6 +6,7 @@ import { BalanceSection } from "./BalanceSection";
 import { PaymentMethodSection } from "./PaymentMethod";
 import { DateSelector } from "./DateSelector";
 import { motion } from "framer-motion";
+import { PreviewModal } from "./PreviewModal";
 
 import { fetchNgnToUsdRate } from "../../../services/coinGecko";
 
@@ -43,7 +44,8 @@ export default function LoanInterface({
 }) {
 	const [activeTab, setActiveTab] = useState("loan");
 
-	const [ngnToUsdRate, setNgnToUsdRate] = useState(0.00067);
+	const [ngnToUsdRate, setNgnToUsdRate] = useState(null);
+	const [showPreview, setShowPreview] = useState(false);
 
 	useEffect(() => {
 		const fetchRate = async () => {
@@ -58,29 +60,43 @@ export default function LoanInterface({
 	}, []);
 
 	const handleProceed = () => {
+		setShowPreview(true);
+	};
+
+	const isProceedDisabled = () => {
 		if (activeTab === "loan") {
-			console.log(
-				"Loan Process:",
-				{
-					depositValue,
-					depositToken,
-					borrowValue,
-					date,
-				},
-				"gas fee",
-				"interest rate",
-				"exchange rate",
-				"wallet address",
-				"duration"
+			// Convert to numbers safely
+			const depositNum = Number(depositValue);
+			const borrowNum = Number(borrowValue);
+
+			// Check for empty, NaN, or non-positive values
+			return (
+				depositValue === "" ||
+				borrowValue === "" ||
+				isNaN(depositNum) ||
+				isNaN(borrowNum) ||
+				depositNum <= 0 ||
+				borrowNum <= 0
 			);
 		} else {
-			console.log("Redeem Process:", {
-				paymentValue,
-				paymentToken,
-				loanBalance,
-			});
+			const paymentNum = Number(paymentValue);
+			return paymentValue === "" || isNaN(paymentNum) || paymentNum <= 0;
 		}
 	};
+
+	const previewData =
+		activeTab === "loan"
+			? {
+					borrowValue,
+					depositToken,
+					depositValue,
+					ngnToUsdRate,
+					date,
+			  }
+			: {
+					paymentValue,
+					loanBalance,
+			  };
 
 	const handleTabChange = (tab) => {
 		setActiveTab(tab);
@@ -142,7 +158,16 @@ export default function LoanInterface({
 					</>
 				)}
 
-				<PrimaryButton onClick={handleProceed}>Proceed</PrimaryButton>
+				<PrimaryButton onClick={handleProceed} disabled={isProceedDisabled()}>
+					Proceed
+				</PrimaryButton>
+
+				<PreviewModal
+					isOpen={showPreview}
+					onClose={() => setShowPreview(false)}
+					type={activeTab}
+					data={previewData}
+				/>
 			</div>
 		</motion.div>
 	);

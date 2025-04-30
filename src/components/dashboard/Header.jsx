@@ -13,7 +13,7 @@ export const Header = () => {
 				animate={{ y: 0, opacity: 1 }}
 				transition={{ delay: 0.5 }}
 			>
-				Welcome Back, Ben
+				Welcome Back
 			</motion.h2>
 
 			<motion.div

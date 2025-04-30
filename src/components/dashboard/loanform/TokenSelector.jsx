@@ -15,7 +15,7 @@ export const TokenSelector = ({
 	return (
 		<button
 			onClick={onClick}
-			className={`flex items-center space-x-2 bg-gray-700 rounded-full px-3 py-1.5 text-sm ${
+			className={`flex items-center space-x-2 bg-gray-700 rounded-full z-10 px-3 py-1.5 text-sm ${
 				showChevron ? "cursor-pointer hover:bg-gray-600" : "cursor-default"
 			} transition-colors`}
 		>

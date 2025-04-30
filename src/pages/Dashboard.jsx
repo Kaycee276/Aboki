@@ -10,14 +10,14 @@ const Dashboard = () => {
 	const [reward, setReward] = useState(1);
 
 	// Redeem section
-	const [paymentValue, setPaymentValue] = useState();
+	const [paymentValue, setPaymentValue] = useState("");
 	const [paymentToken, setPaymentToken] = useState("USDT");
 	const [paymentTokenImage, setPaymentTokenImage] = useState("");
 	const [paymentTokenPrice, setPaymentTokenPrice] = useState(1);
 
 	// Loan section
-	const [depositValue, setDepositValue] = useState();
-	const [borrowValue, setBorrowValue] = useState();
+	const [depositValue, setDepositValue] = useState("");
+	const [borrowValue, setBorrowValue] = useState("");
 	const [depositToken, setDepositToken] = useState("USDT");
 	const [depositTokenImage, setDepositTokenImage] = useState("");
 	const [depositTokenPrice, setDepositTokenPrice] = useState(1);

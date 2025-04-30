@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Outlet } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { DesktopSidebar } from "../components/dashboard/DesktopSidebar";
-import { MobileIconsSidebar } from "../components/dashboard/MobileIconsSideBar";
 import { MobileSidebar } from "../components/dashboard/MobileSideBar";
 
 export default function DashboardLayout() {
@@ -33,9 +32,7 @@ export default function DashboardLayout() {
 					/>
 				)}
 			</AnimatePresence>
-			{/* Always visible Icons-only Sidebar on mobile */}
-			<MobileIconsSidebar />
-			{/* Desktop Sidebar */}
+
 			<DesktopSidebar />
 			<motion.div
 				className="flex-1 flex flex-col p-4 md:p-6 overflow-y-auto ml-16 md:ml-0 w-full custom-scrollbar"

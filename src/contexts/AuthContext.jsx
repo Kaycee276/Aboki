@@ -9,8 +9,8 @@ export const AuthProvider = ({ children }) => {
 	const navigate = useNavigate();
 
 	const connect = () => {
-		console.log("Connected!"); // Just to confirm it's working
 		setConnected(true);
+		navigate("/dashboard");
 	};
 
 	const disconnect = () => {

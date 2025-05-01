@@ -11,6 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import LoanStatus from "./pages/LoanStatus";
 import TrxHistory from "./pages/TrxHistory";
 import Rewards from "./pages/Rewards";
+import NotFound from "./pages/404";
 
 const App = () => {
 	const location = useLocation();
@@ -20,6 +21,7 @@ const App = () => {
 			<AnimatePresence mode="wait">
 				<Routes location={location} key={location.pathname}>
 					{/* Public routes */}
+
 					<Route
 						path="/"
 						element={
@@ -61,6 +63,9 @@ const App = () => {
 						<Route path="history" element={<TrxHistory />} />
 						<Route path="rewards" element={<Rewards />} />
 					</Route>
+
+					{/* Catch all 404 route */}
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</AnimatePresence>
 		</>

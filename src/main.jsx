@@ -8,11 +8,11 @@ import { AuthProvider } from "./contexts/AuthContext"; // ✅
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<WalletConnectProvider>
-				<AuthProvider>
+			<AuthProvider>
+				<WalletConnectProvider>
 					<App />
-				</AuthProvider>
-			</WalletConnectProvider>
+				</WalletConnectProvider>
+			</AuthProvider>
 		</BrowserRouter>
 	</React.StrictMode>
 );

@@ -30,9 +30,8 @@ const ConnectWalletModal = () => {
 		setError(null);
 		try {
 			await new Promise((res) => setTimeout(res, 2000));
-			connect;
+			connect();
 			closeModal();
-			navigate("/dashboard");
 		} catch (err) {
 			setError("Failed to connect wallet. Please try again");
 			console.error("Connection error:", err);

@@ -116,6 +116,7 @@ export default function NotFound() {
 						<img
 							src="/Astronaut.svg"
 							alt="Astronaut"
+							loading="lazy"
 							className="w-24 opacity-80"
 						/>
 					</motion.div>

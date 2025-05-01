@@ -30,6 +30,7 @@ export default function NotFound() {
 							<motion.img
 								src="/404-illustration.svg"
 								alt="Not Found"
+								loading="lazy"
 								initial={{ y: -10 }}
 								animate={{
 									y: [-10, 15, -10],
@@ -44,7 +45,7 @@ export default function NotFound() {
 										repeat: Infinity,
 									},
 								}}
-								className="w-72 md:w-96 mb-6 drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+								className="w-72 md:w-96 mb-6 aspect-[4/3] drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
 							/>
 						</motion.div>
 

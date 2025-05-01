@@ -8,22 +8,29 @@ const API_BASE_URL = "https://api.coingecko.com/api/v3";
 export const fetchAllRates = async () => {
 	try {
 		// Fetch crypto prices and NGN rate in parallel
-		const cryptoResponse = await Promise.all([
+		const [cryptoResponse, ngnResponse] = await Promise.all([
 			fetch(
 				`${API_BASE_URL}/simple/price?ids=tether,ethereum&vs_currencies=usd`
 			),
+			fetch(`${API_BASE_URL}/simple/price?ids=tether&vs_currencies=ngn`),
 		]);
 
-		if (!cryptoResponse.ok) {
+		if (!cryptoResponse.ok || !ngnResponse.ok) {
 			throw new Error("Failed to fetch rates");
 		}
 
 		const cryptoData = await cryptoResponse.json();
+		const ngnData = await ngnResponse.json();
 
 		// Calculate NGN to USD rate (since USDT is pegged to $1)
+		const ngnToUsdRate = ngnData?.tether?.ngn || 1500; // Fallback to ~1500 NGN per $1
 
 		return {
 			crypto: cryptoData,
+			rates: {
+				ngnToUsd: ngnToUsdRate,
+				usdToNgn: ngnData?.tether?.ngn || 1500, // Direct NGN rate from USDT
+			},
 		};
 	} catch (error) {
 		console.error("Error fetching rates:", error);
@@ -33,15 +40,27 @@ export const fetchAllRates = async () => {
 				tether: { usd: 1.0 },
 				ethereum: { usd: 2000.0 },
 			},
+			rates: {
+				ngnToUsd: 0.00067, // ~1500 NGN per $1
+				usdToNgn: 1500,
+			},
 		};
 	}
 };
 
+/**
+ * Gets only crypto prices (USDT and ETH)
+ * @returns {Promise<Object>} Crypto price data
+ */
 export const fetchStablecoinAndEthPrices = async () => {
 	const data = await fetchAllRates();
 	return data.crypto;
 };
 
+/**
+ * Gets detailed token information
+ * @returns {Promise<Array>} Array of token details
+ */
 export const fetchTokenDetails = async () => {
 	try {
 		const response = await fetch(
@@ -93,6 +112,6 @@ export const fetchNgnToUsdRate = async () => {
 		return ngnToUsdRate;
 	} catch (error) {
 		console.error("Error in fetchNgnToUsdRate:", error);
-		return 0.00067;
+		return 0.00067; // Fallback rate (~1500 NGN/USD)
 	}
 };

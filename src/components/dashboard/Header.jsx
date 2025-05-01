@@ -8,7 +8,7 @@ export const Header = () => {
 	return (
 		<header className="flex justify-between items-center mb-6 md:mb-8 w-full">
 			<motion.h2
-				className="text-sm"
+				className="text-sm sm:text-xl md:text-2xl "
 				initial={{ y: -20, opacity: 0 }}
 				animate={{ y: 0, opacity: 1 }}
 				transition={{ delay: 0.5 }}

@@ -48,14 +48,14 @@ export const LoanInputSection = ({
 			<input
 				className="w-full text-white text-2xl sm:text-3xl font-semibold outline-none border-none bg-transparent placeholder-gray-500 mb-1"
 				placeholder="0"
-				value={value || ""}
+				value={value}
 				onChange={handleValueChange}
 				inputMode="numeric"
 				pattern="[0-9]*"
 			/>
 
 			{/* rate in usd */}
-			<div className="text-gray-400 text-xs sm:text-sm">
+			<div className="text-gray-400 text-xs sm:text-sm overflow-x-clip">
 				{isBorrow ? (
 					<>₦{(parseFloat(value) || 0).toLocaleString()}</>
 				) : (

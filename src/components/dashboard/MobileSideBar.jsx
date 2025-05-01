@@ -3,7 +3,7 @@ import { LayoutDashboard, Trophy, History, LogOut, X } from "lucide-react";
 import { MdOutlinePayments } from "react-icons/md";
 import { useAuth } from "../../contexts/AuthContext";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { LogoutConfirmationModal } from "../../common/LogoutConfirmationModal";
 
 export const MobileSidebar = ({ isOpen, onClose }) => {
@@ -11,6 +11,24 @@ export const MobileSidebar = ({ isOpen, onClose }) => {
 	const navigate = useNavigate();
 
 	const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+	const sidebarRef = useRef(null);
+
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+				onClose();
+			}
+		};
+
+		if (isOpen) {
+			document.addEventListener("mousedown", handleClickOutside);
+		}
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [isOpen, onClose]);
 
 	const handleDisconnect = () => {
 		disconnect();
@@ -21,6 +39,7 @@ export const MobileSidebar = ({ isOpen, onClose }) => {
 	return (
 		<motion.div
 			className="md:hidden fixed top-0 left-0 w-64 bg-gray-800 p-4 flex flex-col h-full z-10"
+			ref={sidebarRef}
 			initial={{ x: -256 }}
 			animate={{ x: isOpen ? 0 : -256 }}
 			exit={{ x: -256 }}

@@ -65,22 +65,25 @@ export default function LoanInterface({
 
 	const isProceedDisabled = () => {
 		if (activeTab === "loan") {
-			// Convert to numbers safely
-			const depositNum = Number(depositValue);
-			const borrowNum = Number(borrowValue);
+			const depositTrimmed = depositValue.trim();
+			const borrowTrimmed = borrowValue.trim();
 
-			// Check for empty, NaN, or non-positive values
+			const depositNum = Number(depositTrimmed);
+			const borrowNum = Number(borrowTrimmed);
+
 			return (
-				depositValue === "" ||
-				borrowValue === "" ||
+				depositTrimmed === "" ||
+				borrowTrimmed === "" ||
 				isNaN(depositNum) ||
 				isNaN(borrowNum) ||
 				depositNum <= 0 ||
 				borrowNum <= 0
 			);
 		} else {
-			const paymentNum = Number(paymentValue);
-			return paymentValue === "" || isNaN(paymentNum) || paymentNum <= 0;
+			const paymentTrimmed = paymentValue.trim();
+			const paymentNum = Number(paymentTrimmed);
+
+			return paymentTrimmed === "" || isNaN(paymentNum) || paymentNum <= 0;
 		}
 	};
 

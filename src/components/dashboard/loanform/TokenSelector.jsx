@@ -1,6 +1,6 @@
 // components/TokenComponents.js
 import { ChevronDown } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
 	fetchTokenDetails,
 	fetchStablecoinAndEthPrices,
@@ -37,6 +37,7 @@ export const TokenDropdown = ({
 	const [tokens, setTokens] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [tokenPrices, setTokenPrices] = useState({});
+	const dropdownRef = useRef(null); // 👈 Create a ref
 
 	useEffect(() => {
 		const loadTokens = async () => {
@@ -47,7 +48,6 @@ export const TokenDropdown = ({
 				]);
 				setTokens(tokenData);
 
-				// Create a price map for easy lookup
 				const priceMap = {};
 				tokenData.forEach((token) => {
 					priceMap[token.symbol.toUpperCase()] = token.current_price;
@@ -62,6 +62,20 @@ export const TokenDropdown = ({
 		loadTokens();
 	}, []);
 
+	// 👇 Close dropdown if clicking outside
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+				setIsOpen(false);
+			}
+		};
+
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
+
 	const toggleDropdown = () => setIsOpen(!isOpen);
 
 	const handleTokenSelect = (token) => {
@@ -70,7 +84,7 @@ export const TokenDropdown = ({
 	};
 
 	return (
-		<div className="relative">
+		<div className="relative" ref={dropdownRef}>
 			<TokenSelector
 				token={selectedToken}
 				tokenImage={selectedTokenImage}

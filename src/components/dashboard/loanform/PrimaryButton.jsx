@@ -5,10 +5,10 @@ export const PrimaryButton = ({ children, onClick, disabled }) => {
 		<Button
 			onClick={onClick}
 			disabled={disabled}
-			className={`w-full py-3 px-6 rounded-3xl bg-blue-600 text-white font-medium transition-all  ${
+			className={`w-full py-3 px-6 rounded-3xl bg-[#F5F5F5] text-blue-500 font-medium transition-all  ${
 				disabled
 					? "opacity-50 cursor-not-allowed"
-					: "hover:bg-blue-500 cursor-pointer"
+					: "hover:bg-white cursor-pointer"
 			} `}
 		>
 			{children}

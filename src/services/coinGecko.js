@@ -13,6 +13,12 @@ export const fetchAllRates = async () => {
 				`${API_BASE_URL}/simple/price?ids=tether,ethereum&vs_currencies=usd`
 			),
 			fetch(`${API_BASE_URL}/simple/price?ids=tether&vs_currencies=ngn`),
+			// {
+			// 	mode: "no-cors",
+			// 	headers: {
+			// 		"Content-Type": "application/json",
+			// 	},
+			// },
 		]);
 
 		if (!cryptoResponse.ok || !ngnResponse.ok) {

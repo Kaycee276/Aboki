@@ -6,7 +6,7 @@ import { BalanceSection } from "./BalanceSection";
 import { PaymentMethodSection } from "./PaymentMethod";
 import { DateSelector } from "./DateSelector";
 import { motion } from "framer-motion";
-import { PreviewModal } from "./PreviewModal";
+import { PreviewModal } from "../PreviewModal";
 
 import { fetchNgnToUsdRate } from "../../../services/coinGecko";
 

@@ -1,10 +1,10 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+import { useAccount } from "wagmi";
 
 const ProtectedRoute = ({ children }) => {
-	const { connected } = useAuth();
+	const { isConnected } = useAccount();
 
-	if (!connected) {
+	if (!isConnected) {
 		return <Navigate to="/" replace />;
 	}
 

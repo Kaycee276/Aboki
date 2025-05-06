@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
 import { LayoutDashboard, Trophy, History, LogOut, X } from "lucide-react";
 import { MdOutlinePayments } from "react-icons/md";
-import { useAuth } from "../../contexts/AuthContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { LogoutConfirmationModal } from "../../common/LogoutConfirmationModal";
+import { useDisconnect } from "wagmi";
 
 export const MobileSidebar = ({ isOpen, onClose }) => {
-	const { disconnect } = useAuth();
 	const navigate = useNavigate();
+	const { disconnect } = useDisconnect();
 
 	const [showLogoutModal, setShowLogoutModal] = useState(false);
 
@@ -31,8 +31,8 @@ export const MobileSidebar = ({ isOpen, onClose }) => {
 	}, [isOpen, onClose]);
 
 	const handleDisconnect = () => {
-		disconnect();
 		navigate("/");
+		disconnect();
 		onClose();
 	};
 

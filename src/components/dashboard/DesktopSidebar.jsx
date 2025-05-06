@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
 import { LayoutDashboard, Trophy, History, LogOut } from "lucide-react";
 import { MdOutlinePayments } from "react-icons/md";
-import { useAuth } from "../../contexts/AuthContext";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { LogoutConfirmationModal } from "../../common/LogoutConfirmationModal";
 import { useState } from "react";
 
+import { useDisconnect } from "wagmi";
+
 export const DesktopSidebar = () => {
-	const { disconnect } = useAuth();
 	const navigate = useNavigate();
+	const { disconnect } = useDisconnect();
 
 	const [showLogoutModal, setShowLogoutModal] = useState(false);
 
@@ -93,8 +94,8 @@ export const DesktopSidebar = () => {
 			<LogoutConfirmationModal
 				isOpen={showLogoutModal}
 				onConfirm={() => {
-					disconnect();
 					navigate("/");
+					disconnect();
 					setShowLogoutModal(false);
 				}}
 				onCancel={() => setShowLogoutModal(false)}

@@ -32,22 +32,8 @@ export const Header = () => {
 						)}
 					</button>
 				</div>
-				<UserAvatar />
+				<w3m-network-button />
 			</motion.div>
 		</header>
 	);
 };
-
-const UserAvatar = () => (
-	<motion.div
-		className="h-8 w-8 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center overflow-hidden flex-shrink-0"
-		whileHover={{ scale: 1.05 }}
-		whileTap={{ scale: 0.95 }}
-	>
-		<img
-			src="/api/placeholder/32/32"
-			alt="User avatar"
-			className="h-full w-full object-cover"
-		/>
-	</motion.div>
-);

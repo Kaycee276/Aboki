@@ -55,7 +55,6 @@ const metadata = {
 	name: "Aboki.ETH",
 	description: "Access Fiat Loans",
 	url: "https://abokieth.vercel.app",
-	icons: ["https://picsum.photos/200/300"],
 };
 
 const modal = createAppKit({

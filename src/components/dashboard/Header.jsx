@@ -32,7 +32,7 @@ export const Header = () => {
 						)}
 					</button>
 				</div>
-				<w3m-network-button />
+				<w3m-button />
 			</motion.div>
 		</header>
 	);

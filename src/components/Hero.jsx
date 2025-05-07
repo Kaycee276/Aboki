@@ -8,7 +8,7 @@ export default function Hero() {
 	const prefersReducedMotion = useReducedMotion();
 
 	useEffect(() => {
-		setIsLoaded(true); // Set loaded state after mount
+		setIsLoaded(true);
 	}, []);
 
 	return (

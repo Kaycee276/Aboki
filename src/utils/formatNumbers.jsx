@@ -1,4 +1,3 @@
-// formatNumbers.js
 export const formatCurrency = (value, currency = "USD", decimals = 2) => {
 	const formatter = new Intl.NumberFormat("en-US", {
 		style: "currency",
@@ -13,4 +12,15 @@ export const formatCurrency = (value, currency = "USD", decimals = 2) => {
 	}
 
 	return formatter.format(value || 0);
+};
+
+export const formatNumber = (num) => {
+	if (num === undefined || num === null) {
+		return "0.00";
+	}
+
+	return new Intl.NumberFormat("en-US", {
+		minimumFractionDigits: 2,
+		maximumFractionDigits: 2,
+	}).format(num);
 };

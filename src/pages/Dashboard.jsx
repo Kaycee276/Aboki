@@ -32,7 +32,6 @@ const Dashboard = () => {
 
 	// Modal state
 	const [showTransactions, setShowTransactions] = useState(false);
-	const [showLoanStatus, setShowLoanStatus] = useState(false);
 
 	// Mock transaction data
 	const [transactions, setTransactions] = useState([]);
@@ -84,12 +83,6 @@ const Dashboard = () => {
 
 			<div className="fixed bottom-6 right-6 flex flex-col space-y-3">
 				<button
-					onClick={() => setShowLoanStatus(true)}
-					className="p-3 bg-blue-600 rounded-full shadow-lg hover:bg-blue-500 transition-colors"
-				>
-					<MdOutlinePayments size={20} />
-				</button>
-				<button
 					onClick={() => setShowTransactions(true)}
 					className="p-3 bg-gray-800 rounded-full shadow-lg hover:bg-gray-700 transition-colors"
 				>
@@ -101,15 +94,6 @@ const Dashboard = () => {
 				<TransactionModal
 					onClose={() => setShowTransactions(false)}
 					transactions={transactions}
-				/>
-			)}
-			{showLoanStatus && (
-				<LoanStatusModal
-					onClose={() => setShowLoanStatus(false)}
-					loanBalance={loanBalance}
-					borrowedAmount={50000} // You might want to make this dynamic
-					repaymentDate={date[0]}
-					status={loanBalance > 0 ? "Active" : "Paid"}
 				/>
 			)}
 		</>

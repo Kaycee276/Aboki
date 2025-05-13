@@ -6,7 +6,7 @@ import { useState, useRef, useEffect } from "react";
 import { LogoutConfirmationModal } from "../../common/LogoutConfirmationModal";
 import { useDisconnect } from "wagmi";
 
-export const MobileSidebar = ({ isOpen, onClose }) => {
+export const MobileSidebar = ({ isOpen, onClose, onLoanStatusClick }) => {
 	const navigate = useNavigate();
 	const { disconnect } = useDisconnect();
 
@@ -72,22 +72,22 @@ export const MobileSidebar = ({ isOpen, onClose }) => {
 							text="Dashboard"
 							active={isActive}
 							delay={0.3}
-							onClick={onClose} // Close sidebar when navigating
-						/>
-					)}
-				</NavLink>
-
-				<NavLink to="/dashboard/loan-status" className="text-gray-300">
-					{({ isActive }) => (
-						<NavButton
-							icon={<MdOutlinePayments size={18} />}
-							text="Loan status"
-							active={isActive}
-							delay={0.4}
 							onClick={onClose}
 						/>
 					)}
 				</NavLink>
+
+				{/* Loan Status Button */}
+				<NavButton
+					icon={<MdOutlinePayments size={18} />}
+					text="Loan Status"
+					active={false} // No active state since it's not a route
+					delay={0.4}
+					onClick={() => {
+						onLoanStatusClick(); // Open the modal
+						onClose(); // Close the sidebar
+					}}
+				/>
 
 				<NavLink to="/dashboard/history" className="text-gray-300">
 					{({ isActive }) => (
@@ -96,18 +96,6 @@ export const MobileSidebar = ({ isOpen, onClose }) => {
 							text="Transaction history"
 							active={isActive}
 							delay={0.5}
-							onClick={onClose}
-						/>
-					)}
-				</NavLink>
-
-				<NavLink to="/dashboard/rewards" className="text-gray-300">
-					{({ isActive }) => (
-						<NavButton
-							icon={<Trophy size={18} />}
-							text="Rewards"
-							active={isActive}
-							delay={0.6}
 							onClick={onClose}
 						/>
 					)}

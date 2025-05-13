@@ -8,7 +8,7 @@ import { useState } from "react";
 
 import { useDisconnect } from "wagmi";
 
-export const DesktopSidebar = () => {
+export const DesktopSidebar = ({ onLoanStatusClick }) => {
 	const navigate = useNavigate();
 	const { disconnect } = useDisconnect();
 
@@ -43,17 +43,14 @@ export const DesktopSidebar = () => {
 						/>
 					)}
 				</NavLink>
-
-				<NavLink to="/dashboard/loan-status" className="text-gray-300">
-					{({ isActive }) => (
-						<AnimatedNavButton
-							icon={<MdOutlinePayments size={18} />}
-							text="Loan status"
-							active={isActive}
-							delay={0.6}
-						/>
-					)}
-				</NavLink>
+				{/* Loan Status Button */}
+				<AnimatedNavButton
+					icon={<MdOutlinePayments size={18} />}
+					text="Loan Status"
+					active={false}
+					delay={0.6}
+					onClick={onLoanStatusClick}
+				/>
 
 				<NavLink to="/dashboard/history" className="text-gray-300">
 					{({ isActive }) => (
@@ -62,17 +59,6 @@ export const DesktopSidebar = () => {
 							text="Transaction history"
 							active={isActive}
 							delay={0.7}
-						/>
-					)}
-				</NavLink>
-
-				<NavLink to="/dashboard/rewards" className="text-gray-300">
-					{({ isActive }) => (
-						<AnimatedNavButton
-							icon={<Trophy size={18} />}
-							text="Rewards"
-							active={isActive}
-							delay={0.8}
 						/>
 					)}
 				</NavLink>
@@ -103,10 +89,9 @@ export const DesktopSidebar = () => {
 		</motion.div>
 	);
 };
-
 const AnimatedNavButton = ({ icon, text, active = false, delay = 0 }) => (
 	<motion.div
-		className={`flex items-center space-x-2 p-2 rounded-lg transition-colors ${
+		className={`flex items-center space-x-2 p-2 rounded-lg transition-colors cursor-pointer ${
 			active
 				? "bg-gradient-to-r from-[#0F3EB3] via-[#375FD9] to-[#0B32A5] text-white"
 				: "text-gray-300 hover:bg-gray-700"

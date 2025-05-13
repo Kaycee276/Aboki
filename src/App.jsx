@@ -8,9 +8,9 @@ import Whitepaper from "./pages/Whitepaper";
 import GlowingBubblesBackground from "./common/GlowingBubbles";
 import Header from "./components/Header";
 import Dashboard from "./pages/Dashboard";
-import LoanStatus from "./pages/LoanStatus";
+// import LoanStatus from "./pages/LoanStatus";
 import TrxHistory from "./pages/TrxHistory";
-import Rewards from "./pages/Rewards";
+// import Rewards from "./pages/Rewards";
 import NotFound from "./pages/404";
 
 const App = () => {
@@ -59,9 +59,9 @@ const App = () => {
 					{/* Dashboard routes */}
 					<Route path="/dashboard" element={<DashboardLayout />}>
 						<Route index element={<Dashboard />} />
-						<Route path="loan-status" element={<LoanStatus />} />
+						{/* <Route path="loan-status" element={<LoanStatus />} /> */}
 						<Route path="history" element={<TrxHistory />} />
-						<Route path="rewards" element={<Rewards />} />
+						{/* <Route path="rewards" element={<Rewards />} /> */}
 					</Route>
 
 					{/* Catch all 404 route */}

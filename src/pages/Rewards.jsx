@@ -1,5 +1,5 @@
-const Rewards = () => {
-	return <h1>This is Rewards section</h1>;
-};
+// const Rewards = () => {
+// 	return <h1>This is Rewards section</h1>;
+// };
 
-export default Rewards;
+// export default Rewards;

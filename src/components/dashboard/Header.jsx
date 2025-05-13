@@ -2,36 +2,27 @@ import { motion } from "framer-motion";
 import { Bell } from "lucide-react";
 
 export const Header = () => {
-	// Example notification count - you can make this dynamic
-	const notificationCount = 3; // Change this to your actual notification count
-
 	return (
 		<header className="flex justify-between items-center mb-6 md:mb-8 w-full">
-			<motion.h2
-				className="text-sm sm:text-xl md:text-2xl "
+			{/* Logo on the left */}
+			<motion.div
+				className="flex items-center"
 				initial={{ y: -20, opacity: 0 }}
 				animate={{ y: 0, opacity: 1 }}
-				transition={{ delay: 0.5 }}
+				transition={{ delay: 0.4 }}
 			>
-				Welcome Back
-			</motion.h2>
+				<h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+					Aboki<span className="text-blue-400">.eth</span>
+				</h1>
+			</motion.div>
 
+			{/* Right side content */}
 			<motion.div
 				className="flex items-center space-x-4"
 				initial={{ y: -20, opacity: 0 }}
 				animate={{ y: 0, opacity: 1 }}
 				transition={{ delay: 0.6 }}
 			>
-				<div className="relative">
-					<button className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative">
-						<Bell className="h-5 w-5" />
-						{notificationCount > 0 && (
-							<span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-								{notificationCount}
-							</span>
-						)}
-					</button>
-				</div>
 				<w3m-button />
 			</motion.div>
 		</header>

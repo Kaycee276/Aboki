@@ -26,6 +26,8 @@ export default function LoanInterface({
 	borrowTokenImage,
 	depositTokenImage,
 
+	setLoanBalance,
+	setAssets,
 	setPaymentToken,
 	setPaymentTokenImage,
 	setPaymentTokenPrice,
@@ -36,6 +38,9 @@ export default function LoanInterface({
 	setPaymentValue,
 	setDate,
 	setDepositTokenPrice,
+
+	transactions,
+	setTransactions,
 
 	// incase of loan in another token
 	setBorrowTokenPrice,
@@ -95,6 +100,7 @@ export default function LoanInterface({
 					depositValue,
 					ngnToUsdRate,
 					date,
+					depositTokenPrice,
 			  }
 			: {
 					paymentValue,
@@ -170,6 +176,10 @@ export default function LoanInterface({
 					onClose={() => setShowPreview(false)}
 					type={activeTab}
 					data={previewData}
+					transactions={transactions}
+					setTransactions={setTransactions}
+					setLoanBalance={setLoanBalance}
+					setAssets={setAssets}
 				/>
 			</div>
 		</motion.div>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AccountDetailsModal } from "./AccountDetailsModal";
 import { Pencil, Trash2 } from "lucide-react";
 
-export const ConfirmationStep = ({ onClose }) => {
+export const ConfirmationStep = ({ onClose, onConfirm }) => {
 	const [showAccountModal, setShowAccountModal] = useState(false);
 	const [bankAccounts, setBankAccounts] = useState([]);
 	const [selectedAccountIndex, setSelectedAccountIndex] = useState(null);
@@ -51,7 +51,7 @@ export const ConfirmationStep = ({ onClose }) => {
 	const handleConfirm = () => {
 		if (selectedAccountIndex !== null) {
 			console.log("Selected account:", bankAccounts[selectedAccountIndex]);
-			onClose();
+			onConfirm();
 		}
 	};
 

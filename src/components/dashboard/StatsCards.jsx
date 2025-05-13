@@ -25,7 +25,7 @@ export function StatsCards({ assets, loanBalance, reward }) {
 			<StatCard
 				icon={HandCoins}
 				label="Loan balance"
-				value={`$${loanBalance}`}
+				value={`₦${loanBalance}`}
 			/>
 			<StatCard icon={Trophy} label="Rewards" value={`${reward}%`} />
 		</div>

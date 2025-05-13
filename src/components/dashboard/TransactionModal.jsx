@@ -36,32 +36,27 @@ export const TransactionModal = ({ onClose, transactions = [] }) => {
 								<div key={index} className="p-3 bg-gray-800 rounded-lg">
 									<div className="flex justify-between items-start">
 										<div>
-											<span className="font-medium block">
+											<span
+												className={`font-medium block ${
+													tx.borrowValue ? "text-red-500" : "text-green-500"
+												}`}
+											>
 												{tx.borrowValue ? "Loan" : "Redeem"}
 											</span>
+
 											<span className="text-sm text-gray-400">
 												Repayment Date:{" "}
 												{new Date(tx.date).toLocaleString().split(",")[0]}
 											</span>
 										</div>
 										<div className="text-right">
-											{tx.borrowValue ? (
-												<>
-													<span className="font-medium block">
-														{tx.borrowValue}
-													</span>
-													<span className="text-sm text-gray-400">Loan</span>
-												</>
-											) : (
-												<>
-													<span className="font-medium block">
-														{tx.depositValue} {tx.depositToken}
-													</span>
-													<span className="text-sm text-gray-400">
-														${tx.depositTokenPrice}
-													</span>
-												</>
-											)}
+											<span className="font-medium block">
+												₦{tx.borrowValue}
+											</span>
+
+											<span className="font-medium block">
+												{tx.depositValue} {tx.depositToken}
+											</span>
 										</div>
 									</div>
 								</div>

@@ -39,9 +39,10 @@ export const TransactionModal = ({ onClose, transactions = [] }) => {
 	};
 
 	// Sort transactions by date (newest first)
-	const sortedTransactions = [...transactions].sort(
-		(a, b) => new Date(b.date) - new Date(a.date)
-	);
+	const sortedTransactions =
+		Array.isArray(transactions) && transactions.length > 0
+			? [...transactions].sort((a, b) => new Date(b.date) - new Date(a.date))
+			: [];
 
 	// Group transactions by month
 	const groupedTransactions = sortedTransactions.reduce(

@@ -2,11 +2,8 @@ import { useEffect, useState } from "react";
 import { Header } from "../components/dashboard/Header";
 import { StatsCards } from "../components/dashboard/StatsCards";
 import LoanInterface from "../components/dashboard/loanform/LoanInterface";
-import { BowArrowIcon } from "lucide-react";
-import { MdOutlinePayments } from "react-icons/md";
 import { History } from "lucide-react";
 import { TransactionModal } from "../components/dashboard/TransactionModal";
-import { LoanStatusModal } from "../components/dashboard/LoanstatusModal";
 
 const Dashboard = () => {
 	const [assets, setAssets] = useState(0.0);

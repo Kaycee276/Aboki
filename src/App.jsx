@@ -25,7 +25,7 @@ const App = () => {
 					<Route
 						path="/"
 						element={
-							<main className="bg-gradient-to-br from-[#161616] to-[#000512] pt-4 px-6">
+							<main className="bg-gradient-to-br from-[#161616] to-[#000512] pt-4 px-6 ">
 								<Header />
 								<GlowingBubblesBackground>
 									<Home />

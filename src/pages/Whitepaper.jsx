@@ -63,9 +63,9 @@ const WhitePaper = () => {
 				custom={5}
 			>
 				<a
-					href="/whitepaper.pdf" //replace with actual whitepaper pdf
-					download
-					className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#203470] text-white hover:bg-[#0f2a89] transition-all duration-200 font-semibold"
+					// href="/whitepaper.pdf"
+					// download
+					className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#203470] text-white hover:bg-[#0f2a89] transition-all duration-200 font-semibold cursor-pointer"
 				>
 					<FaFileDownload size={20} />
 					Download PDF

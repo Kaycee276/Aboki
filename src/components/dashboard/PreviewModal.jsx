@@ -29,12 +29,22 @@ export const PreviewModal = ({
 		console.log("Final Transaction:", transactions);
 
 		saveTransactionToHistory(transactions);
-		setLoanBalance((prev) => prev + parseFloat(transactions.borrowValue));
-		setAssets(
-			(prev) =>
-				prev +
-				parseFloat(transactions.depositValue) * transactions.depositTokenPrice
+
+		const newLoanBalance = (prevLoanBalance) =>
+			prevLoanBalance + parseFloat(transactions.borrowValue);
+		const updatedLoanBalance = newLoanBalance(
+			JSON.parse(localStorage.getItem("loanBalance") || "0")
 		);
+		localStorage.setItem("loanBalance", JSON.stringify(updatedLoanBalance));
+		setLoanBalance(updatedLoanBalance);
+
+		const addedAssets =
+			parseFloat(transactions.depositValue) * transactions.depositTokenPrice;
+		const updatedAssets =
+			JSON.parse(localStorage.getItem("assets") || "0") + addedAssets;
+		localStorage.setItem("assets", JSON.stringify(updatedAssets));
+		setAssets(updatedAssets);
+
 		handleConfirm();
 	};
 

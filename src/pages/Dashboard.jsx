@@ -6,8 +6,12 @@ import { History } from "lucide-react";
 import { TransactionModal } from "../components/dashboard/TransactionModal";
 
 const Dashboard = () => {
-	const [assets, setAssets] = useState(0.0);
-	const [loanBalance, setLoanBalance] = useState(0.0);
+	const [assets, setAssets] = useState(
+		JSON.parse(localStorage.getItem("assets") || 0)
+	);
+	const [loanBalance, setLoanBalance] = useState(
+		JSON.parse(localStorage.getItem("loanBalance") || 0)
+	);
 	const [reward, setReward] = useState(1);
 
 	// Redeem section

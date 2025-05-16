@@ -47,6 +47,7 @@ export default function Hero() {
 					src="/abstract.png"
 					alt="Colorful abstract shape"
 					className="w-[300px] sm:w-[400px]"
+					loading="lazy"
 				/>
 			</motion.div>
 		</section>

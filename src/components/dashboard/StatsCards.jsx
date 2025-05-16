@@ -1,5 +1,6 @@
 import { Wallet, HandCoins, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
+import { formatNumber } from "../../utils/formatNumbers";
 
 const StatCard = ({ icon: Icon, label, value }) => (
 	<motion.div
@@ -21,11 +22,15 @@ const StatCard = ({ icon: Icon, label, value }) => (
 export function StatsCards({ assets, loanBalance, reward }) {
 	return (
 		<div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center p-6 rounded-xl w-full">
-			<StatCard icon={Wallet} label="Total assets" value={`$${assets}`} />
+			<StatCard
+				icon={Wallet}
+				label="Total assets"
+				value={`$${formatNumber(assets)}`}
+			/>
 			<StatCard
 				icon={HandCoins}
 				label="Loan balance"
-				value={`₦${loanBalance}`}
+				value={`₦${formatNumber(loanBalance)}`}
 			/>
 			<StatCard icon={Trophy} label="Rewards" value={`${reward}%`} />
 		</div>

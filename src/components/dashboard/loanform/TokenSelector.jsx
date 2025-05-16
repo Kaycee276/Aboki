@@ -32,7 +32,7 @@ export const TokenDropdown = ({
 	const [tokens, setTokens] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [tokenPrices, setTokenPrices] = useState({});
-	const dropdownRef = useRef(null); // 👈 Create a ref
+	const dropdownRef = useRef(null);
 
 	useEffect(() => {
 		const loadTokens = async () => {

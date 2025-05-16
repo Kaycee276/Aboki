@@ -3,7 +3,6 @@ import { Header } from "./Header";
 import { LoanInputSection } from "./LoanInputSection";
 import { PrimaryButton } from "./PrimaryButton";
 import { BalanceSection } from "./BalanceSection";
-import { PaymentMethodSection } from "./PaymentMethod";
 import { DateSelector } from "./DateSelector";
 import { motion } from "framer-motion";
 import { PreviewModal } from "../PreviewModal";
@@ -47,7 +46,7 @@ export default function LoanInterface({
 	setBorrowTokenImage,
 	setBorrowToken,
 }) {
-	const [activeTab, setActiveTab] = useState("loan");
+	const [activeTab, setActiveTab] = useState("redeem");
 
 	const [ngnToUsdRate, setNgnToUsdRate] = useState(null);
 	const [showPreview, setShowPreview] = useState(false);
@@ -104,7 +103,10 @@ export default function LoanInterface({
 			  }
 			: {
 					paymentValue,
-					// paymentToken,
+					paymentToken,
+					paymentTokenImage,
+					paymentTokenPrice,
+					ngnToUsdRate,
 					loanBalance,
 			  };
 
@@ -140,11 +142,11 @@ export default function LoanInterface({
 							title="Borrow"
 							value={borrowValue}
 							setValue={setBorrowValue}
+							isBorrow={true}
 							token={borrowToken}
 							tokenImage={borrowTokenImage}
 							tokenPrice={borrowTokenPrice}
 							showChevron={false}
-							isBorrow={true}
 							exchangeRate={ngnToUsdRate}
 						/>
 
@@ -153,12 +155,13 @@ export default function LoanInterface({
 				) : (
 					<>
 						<BalanceSection balance={loanBalance} />
-						<PaymentMethodSection
+						<LoanInputSection
+							title="Method of payment"
 							value={paymentValue}
 							setValue={setPaymentValue}
 							token={paymentToken}
 							tokenImage={paymentTokenImage}
-							showChevron={false}
+							// showChevron={false}
 							tokenPrice={paymentTokenPrice}
 							onTokenChange={(token, image, price) => {
 								setPaymentToken(token);

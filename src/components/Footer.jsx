@@ -3,7 +3,8 @@ const Footer = () => {
 		<footer className=" py-4 mt-8">
 			<div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center">
 				<p className="text-xs text-gray-300">
-					&copy; {new Date().getFullYear()} Copyright by Aboki.
+					<span className="text-[#082370]">&copy;</span>
+					{new Date().getFullYear()} Copyright by Aboki.
 					<span className="text-[#082370]">eth</span>
 				</p>
 

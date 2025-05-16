@@ -104,6 +104,7 @@ export default function LoanInterface({
 			  }
 			: {
 					paymentValue,
+					// paymentToken,
 					loanBalance,
 			  };
 
@@ -157,6 +158,7 @@ export default function LoanInterface({
 							setValue={setPaymentValue}
 							token={paymentToken}
 							tokenImage={paymentTokenImage}
+							showChevron={false}
 							tokenPrice={paymentTokenPrice}
 							onTokenChange={(token, image, price) => {
 								setPaymentToken(token);

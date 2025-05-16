@@ -5,6 +5,7 @@ export const PaymentMethodSection = ({
 	token,
 	setValue,
 	onTokenChange,
+	showChevron,
 }) => {
 	return (
 		<div className="bg-gray-800 p-3 sm:p-4 rounded-xl mb-4 sm:mb-6">
@@ -12,7 +13,9 @@ export const PaymentMethodSection = ({
 				<div className="text-gray-400 text-xs sm:text-sm">
 					Method of payment
 				</div>
-				<TokenDropdown selectedToken={token} onTokenSelect={onTokenChange} />
+				{!showChevron && (
+					<TokenDropdown selectedToken={token} onTokenSelect={onTokenChange} />
+				)}
 			</div>
 			<input
 				className="text-white text-xl sm:text-2xl font-semibold outline-none border-none"

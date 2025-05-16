@@ -34,8 +34,11 @@ const Dashboard = () => {
 	// Modal state
 	const [showTransactions, setShowTransactions] = useState(false);
 
-	// Mock transaction data
-	const [transactions, setTransactions] = useState([]);
+	// Mock transaction data stored in localstorage
+	const [transactions, setTransactions] = useState(() => {
+		const stored = localStorage.getItem("transactionHistory");
+		return stored ? JSON.parse(stored) : [];
+	});
 
 	useEffect(() => {
 		const storedTransactions = JSON.parse(
@@ -94,7 +97,7 @@ const Dashboard = () => {
 			{showTransactions && (
 				<TransactionModal
 					onClose={() => setShowTransactions(false)}
-					transactions={transactions}
+					initialTransactions={transactions}
 				/>
 			)}
 		</>

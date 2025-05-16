@@ -6,12 +6,7 @@ import {
 	fetchStablecoinAndEthPrices,
 } from "../../../services/coinGecko";
 
-export const TokenSelector = ({
-	token,
-	tokenImage,
-	onClick,
-	showChevron = true,
-}) => {
+export const TokenSelector = ({ token, tokenImage, onClick, showChevron }) => {
 	return (
 		<button
 			onClick={onClick}
